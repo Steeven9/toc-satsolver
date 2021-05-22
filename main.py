@@ -1,5 +1,4 @@
 import pandas as pd
-from enums import ColorType, GarmentType
 from z3 import *
 
 if __name__ == '__main__':
@@ -35,7 +34,7 @@ if __name__ == '__main__':
     # Basic clauses
 
     # Garments
-    s.add(Xor(shirt, pants))                # No shorts and pants
+    s.add(Xor(shorts, pants))               # No shorts and pants
     s.add(Xor(shorts, jacket))              # No shorts and jacket
     s.add(Not(And(scarf, Not(jacket))))     # No scarf without jacket
     s.add(Not(And(gloves, Not(jacket))))    # No gloves without jacket
