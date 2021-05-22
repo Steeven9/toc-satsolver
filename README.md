@@ -3,7 +3,7 @@ Assignment 6 code and report for group 5
 
 ## Dependencies
 
-`pip install z3-solver pandas`
+`pip install z3-solver pandas flask flask_cors werkzeug`
 
 ## Constraints
 

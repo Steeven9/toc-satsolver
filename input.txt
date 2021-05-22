@@ -1,4 +1,7 @@
+# First line must be this one:
 garment, color
-shirt, black
-shorts, white
-jacket, blue
+# then you can insert the pairs (garnment, color) below
+scarf, blue
+jacket, yellow
+pants, orange
+shorts, blue

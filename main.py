@@ -14,11 +14,11 @@ def sat_solve(data):
     # Basic clauses
 
     # Garments
-    s.add(Xor(shorts, pants))               # No shorts and pants
-    s.add(Xor(shorts, jacket))              # No shorts and jacket
-    s.add(Not(And(scarf, Not(jacket))))     # No scarf without jacket
-    s.add(Not(And(tie, Not(shirt))))        # No tie without shirt
-    s.add(Not(And(gloves, Not(jacket))))    # No gloves without jacket
+    s.add(Not(And(shorts, pants)))          # No shorts and pants
+    s.add(Not(And(shorts, jacket)))         # No shorts and jacket
+    s.add(Implies(scarf, jacket))           # No scarf without jacket
+    s.add(Implies(gloves, jacket))          # No gloves without jacket
+    s.add(Or(Not(tie), shirt))              # No tie without shirt
 
     # Colors
     s.add(Not(And(yellow, white)))
@@ -32,7 +32,10 @@ def sat_solve(data):
     # Parse input-related clauses
     cond_array = []
     for pair in data.values:
-        cond_array.append(And(dict[pair[0]], dict[pair[1]]))
+        cond_array.append(And(dict_garnments[pair[0]], dict_colors[pair[1]]))
+    for el in dict_garnments:
+        if el not in data.values:
+            s.add(Not(dict_garnments[el]))
     s.add(Or(cond_array))
 
     print("\nConstraints:")
@@ -65,5 +68,5 @@ def sat_solve(data):
             print("%s: %s" % (k, v))
 
 if __name__ == '__main__':
-    data = pd.read_csv('input.txt', delimiter=', ', engine='python')
+    data = pd.read_csv('input.txt', delimiter=', ', comment='#', engine='python')
     sat_solve(data)
