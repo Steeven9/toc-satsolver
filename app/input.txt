@@ -1,4 +1,0 @@
-garment, color
-shirt, black
-shorts, white
-jacket, blue

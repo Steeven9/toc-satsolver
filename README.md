@@ -14,7 +14,7 @@ pip install --no-cache-dir -r requirements.txt
 ```console
 python main.py input_file
 ```
-where `input_file` is a text file with the pairs (garment, color). See example or below for format.
+where `input_file` is a text file with the pairs (garment, color). See `examples/` or below for format.
 
 
 ## Run the webserver
