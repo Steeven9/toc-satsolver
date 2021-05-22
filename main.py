@@ -54,6 +54,7 @@ def sat_solve(data):
                 print("%s = %s" % (d.name(), m[d]))
 
         print("\nActual pairs:")
+        actual_pairs = []
         # Return actual pairs
         for pair in data.values:
             for d in m.decls():
@@ -62,12 +63,15 @@ def sat_solve(data):
                     for d in m.decls():
                         if pair[1] == d.name() and m[d]:
                             print("%s %s" % (gar, d.name()))
+                            actual_pairs.append((gar, d.name()))
 
     if debug:
         print("\nStatistics:")
         # Traverse statistics
         for k, v in s.statistics():
             print("%s: %s" % (k, v))
+    
+    return actual_pairs
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:

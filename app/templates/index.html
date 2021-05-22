@@ -18,6 +18,12 @@
           Fashion Store 
         </marquee>
       </marquee>
+      {% if data %}
+        <!-- TODO solusction -->
+        {% for el in data %}
+          <div>{{ el }}</div>
+        {% endfor %}
+      {% else %}
       <h2>
         Build your mannequin from an input file.
       </h2>
@@ -32,5 +38,6 @@
       <form id="buildPairs" action = "/solver" method = "POST">
       </form> 
       <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
+      {% endif %}
 </body>
 </html>
