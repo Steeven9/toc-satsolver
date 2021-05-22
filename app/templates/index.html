@@ -21,7 +21,7 @@
       <h2>
         Build your mannequin from an input file.
       </h2>
-      <form action = "http://localhost:5000/uploader" method = "POST" 
+      <form action = "/uploader" method = "POST" 
          enctype = "multipart/form-data">
          <input type = "file" name = "file" />
          <input type = "submit" value="Solve!"/>
@@ -29,8 +29,7 @@
       <h2>
         Build your mannequin here
       </h2>
-      <form id="buildPairs" action = "http://localhost:5000/" method = "POST">
-         
+      <form id="buildPairs" action = "/solver" method = "POST">
       </form> 
       <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>
