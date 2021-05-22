@@ -20,15 +20,17 @@ def index():
 
 @app.route('/solusction', methods = ['POST'])
 def solusction():
-    print(request.form)
-    val = []
+    garments = []
+    colors = []
     n = int(len(request.form)/2)
     for i in range(n):
         garment = request.form['g'+ str(i)]
         color = request.form['c'+ str(i)]
-        val.append((garment, color))
-    print(val)
-    sol = sat_solve(val, 'not_csv')
+        garments.append(garment)
+        colors.append(color)
+    dict = {'garment': garments, 'color': colors} 
+    df = pd.DataFrame(dict)
+    sol = sat_solve(df)
     return render_template('index.html', data=sol)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
@@ -37,5 +39,5 @@ def upload_file():
       f = request.files['file']
       f.save(secure_filename('input.txt'))
       data = pd.read_csv('input.txt', delimiter=', ', comment='#', engine='python')
-      sol = sat_solve(data, 'csv')
+      sol = sat_solve(data)
       return render_template('index.html', data=sol)
