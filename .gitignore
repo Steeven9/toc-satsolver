@@ -1,0 +1,24 @@
+.vscode/
+.idea/
+__pycache__/
+
+# MS Office
+~$*
+
+# LaTeX
+*.log
+*.synctex.gz
+*.aux
+*.toc
+*.out
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.lof
+*.lot
+
+# System
+Thumbs.db
+desktop.ini
+.DS_Store
