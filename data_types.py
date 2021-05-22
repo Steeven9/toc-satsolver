@@ -24,7 +24,7 @@ pink = Bool('pink')
 white = Bool('white')
 black = Bool('black')
 
-dict_garnments = {
+dict_garments = {
     'pants': pants,
     'shirt': shirt,
     'hat': hat,

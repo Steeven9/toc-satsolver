@@ -1,3 +1,5 @@
+import sys
+
 import pandas as pd
 from z3 import *
 
@@ -32,10 +34,10 @@ def sat_solve(data):
     # Parse input-related clauses
     cond_array = []
     for pair in data.values:
-        cond_array.append(And(dict_garnments[pair[0]], dict_colors[pair[1]]))
-    for el in dict_garnments:
+        cond_array.append(And(dict_garments[pair[0]], dict_colors[pair[1]]))
+    for el in dict_garments:
         if el not in data.values:
-            s.add(Not(dict_garnments[el]))
+            s.add(Not(dict_garments[el]))
     s.add(Or(cond_array))
 
     print("\nConstraints:")
@@ -68,5 +70,8 @@ def sat_solve(data):
             print("%s: %s" % (k, v))
 
 if __name__ == '__main__':
-    data = pd.read_csv('input.txt', delimiter=', ', comment='#', engine='python')
+    if len(sys.argv) != 2:
+        print("Usage: %s filename" % sys.argv[0])
+        exit()
+    data = pd.read_csv(sys.argv[1], delimiter=', ', comment='#', engine='python')
     sat_solve(data)

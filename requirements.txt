@@ -1,0 +1,5 @@
+z3-solver
+pandas
+flask
+flask_cors
+werkzeug

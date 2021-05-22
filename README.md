@@ -1,13 +1,42 @@
-# SATsolver
-Assignment 6 code and report for group 5
+# Fashion store SATsolver
+Assignment 6 code and report for group 5 (Andrea Brites Marto, Tommaso Rodolfo Masera, Stefano Taillefert, Ted)
 
-## Dependencies
 
-`pip install z3-solver pandas flask flask_cors werkzeug`
+## Install dependencies
+
+```console
+pip install --no-cache-dir -r requirements.txt
+```
+
+
+## Run from command line
+
+```console
+python main.py input_file
+```
+where `input_file` is a text file with the pairs (garment, color). See example or below for format.
+
+
+## Run the webserver
+
+```console
+cd app
+```
+
+```console
+flask run
+```
+
+
+## Run the webserver with Docker
+
+```console
+docker-compose up
+```
 
 ## Constraints
 
-Colors:
+Colors available:
 
 Red\
 Yellow\
@@ -20,7 +49,7 @@ Pink\
 White\
 Black
 
-Garments:
+Garments available:
 
 Pants\
 Shirt\
@@ -32,9 +61,6 @@ Shoes\
 Tie\
 Scarf\
 Shorts
-
-Min colors: 3\
-Max colors: 5
 
 Garment constraints:
 
@@ -54,9 +80,10 @@ Red-orange\
 Green-pink\
 Green-orange
 
-## Input format
 
-A .txt file in the format (first line is fixed, then the pairs):
+## Input file format
+
+A text file in the following format (first line is fixed, then the pairs):
 ```
 garment, color
 shirt, black

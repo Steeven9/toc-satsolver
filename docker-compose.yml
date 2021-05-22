@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  satsolver:
+    container_name: satsolver
+    build: .
+    ports:
+      - "5000:5000"
+networks:
+  default:
+    name: satsolver
