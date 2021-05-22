@@ -1,5 +1,5 @@
-# toc-satsolver
-ToC assignment 6 code and report
+# SATsolver
+Assignment 6 code and report for group 5
 
 ## Dependencies
 
@@ -29,7 +29,7 @@ Jacket\
 Sweater\
 Gloves\
 Shoes\
-Underwear\
+Tie\
 Scarf\
 Shorts
 

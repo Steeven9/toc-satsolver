@@ -1,37 +1,15 @@
 import pandas as pd
 from z3 import *
 
+from data_types import *
+
 debug = False
 
-if __name__ == '__main__':
-    data = pd.read_csv('input.txt', delimiter=', ', engine='python')
+def sat_solve(data):
     print("Input data:")
     print(data)
 
     s = Solver()
-    # Garments
-    pants = Bool('pants')
-    shirt = Bool('shirt')
-    hat = Bool('hat')
-    jacket = Bool('jacket')
-    sweater = Bool('sweater')
-    gloves = Bool('gloves')
-    shoes = Bool('shoes')
-    tie = Bool('tie')
-    scarf = Bool('scarf')
-    shorts = Bool('shorts')
-
-    # Color
-    red = Bool('red')
-    yellow = Bool('yellow')
-    orange = Bool('orange')
-    green = Bool('green')
-    blue = Bool('blue')
-    purple = Bool('purple')
-    brown = Bool('brown')
-    pink = Bool('pink')
-    white = Bool('white')
-    black = Bool('black')
 
     # Basic clauses
 
@@ -51,9 +29,12 @@ if __name__ == '__main__':
     s.add(Not(And(green, pink)))
     s.add(Not(And(green, orange)))
 
-    # TODO Parse input-related clauses
-    s.add(Or(And(shirt, black), And(shorts, white), And(jacket, blue)))
-    
+    # Parse input-related clauses
+    cond_array = []
+    for pair in data.values:
+        cond_array.append(And(dict[pair[0]], dict[pair[1]]))
+    s.add(Or(cond_array))
+
     print("\nConstraints:")
     for c in s.assertions():
         print(c)
@@ -63,7 +44,7 @@ if __name__ == '__main__':
     if s.check() == sat:
         m = s.model()
         if debug:
-            print("\nFull model:")    
+            print("\nFull model:")
             for d in m.decls():
                 print("%s = %s" % (d.name(), m[d]))
 
@@ -76,8 +57,13 @@ if __name__ == '__main__':
                     for d in m.decls():
                         if pair[1] == d.name() and m[d]:
                             print("%s %s" % (gar, d.name()))
- 
-    print("\nStatistics:")
-    # Traverse statistics
-    for k, v in s.statistics():
-        print("%s: %s" % (k, v))
+
+    if debug:
+        print("\nStatistics:")
+        # Traverse statistics
+        for k, v in s.statistics():
+            print("%s: %s" % (k, v))
+
+if __name__ == '__main__':
+    data = pd.read_csv('input.txt', delimiter=', ', engine='python')
+    sat_solve(data)
