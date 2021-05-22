@@ -1,6 +1,8 @@
 import pandas as pd
 from z3 import *
 
+debug = False
+
 if __name__ == '__main__':
     data = pd.read_csv('input.txt', delimiter=', ', engine='python')
     print("Input data:")
@@ -15,7 +17,7 @@ if __name__ == '__main__':
     sweater = Bool('sweater')
     gloves = Bool('gloves')
     shoes = Bool('shoes')
-    underwear = Bool('underwear')
+    tie = Bool('tie')
     scarf = Bool('scarf')
     shorts = Bool('shorts')
 
@@ -37,8 +39,8 @@ if __name__ == '__main__':
     s.add(Xor(shorts, pants))               # No shorts and pants
     s.add(Xor(shorts, jacket))              # No shorts and jacket
     s.add(Not(And(scarf, Not(jacket))))     # No scarf without jacket
+    s.add(Not(And(tie, Not(shirt))))        # No tie without shirt
     s.add(Not(And(gloves, Not(jacket))))    # No gloves without jacket
-    s.add(underwear)                        # At least underwear
 
     # Colors
     s.add(Not(And(yellow, white)))
@@ -49,7 +51,8 @@ if __name__ == '__main__':
     s.add(Not(And(green, pink)))
     s.add(Not(And(green, orange)))
 
-    # TODO input-related clauses
+    # TODO Parse input-related clauses
+    s.add(Or(And(shirt, black), And(shorts, white), And(jacket, blue)))
     
     print("\nConstraints:")
     for c in s.assertions():
@@ -58,10 +61,23 @@ if __name__ == '__main__':
     print("\nResult: %s" % s.check())
 
     if s.check() == sat:
-        print("\nModel:")
-        print(s.model())
+        m = s.model()
+        if debug:
+            print("\nFull model:")    
+            for d in m.decls():
+                print("%s = %s" % (d.name(), m[d]))
 
+        print("\nActual pairs:")
+        # Return actual pairs
+        for pair in data.values:
+            for d in m.decls():
+                if pair[0] == d.name() and m[d]:
+                    gar = d.name()
+                    for d in m.decls():
+                        if pair[1] == d.name() and m[d]:
+                            print("%s %s" % (gar, d.name()))
+ 
     print("\nStatistics:")
-    # Traversing statistics
+    # Traverse statistics
     for k, v in s.statistics():
         print("%s: %s" % (k, v))

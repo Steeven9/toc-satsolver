@@ -40,10 +40,9 @@ Garment constraints:
 
 No shorts and pants\
 No shorts and jacket\
-No tie without shirt\
 No scarf without jacket\
-No gloves without jacket\
-At least underwear
+No tie without shirt\
+No gloves without jacket
 
 Colors that don't go together:
 
