@@ -18,9 +18,18 @@ app.config['JSON_AS_ASCII'] = False
 def index():
     return render_template('index.html')
 
-@app.route('/solusction')
+@app.route('/solusction', methods = ['POST'])
 def solusction():
-    return render_template('index.html')
+    print(request.form)
+    val = []
+    n = int(len(request.form)/2)
+    for i in range(n):
+        garment = request.form['g'+ str(i)]
+        color = request.form['c'+ str(i)]
+        val.append((garment, color))
+    print(val)
+    sol = sat_solve(val, 'not_csv')
+    return render_template('index.html', data=sol)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
@@ -28,5 +37,5 @@ def upload_file():
       f = request.files['file']
       f.save(secure_filename('input.txt'))
       data = pd.read_csv('input.txt', delimiter=', ', comment='#', engine='python')
-      sol = sat_solve(data)
+      sol = sat_solve(data, 'csv')
       return render_template('index.html', data=sol)

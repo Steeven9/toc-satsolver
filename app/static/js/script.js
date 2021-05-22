@@ -1,5 +1,5 @@
 // globals variable
-let c_clrs = 1;
+let nClrs = 0;
 let colors = ['red', 'yellow', ' orange', 'green', 'blue', 'purple', 'brown', 'pink', 'white', 'black'];
 let garments = ['pants', 'shirt', ' hat', 'jacket', 'sweater', 'gloves', 'shoes', 'tie', 'scarf', 'shorts'];
 
@@ -10,9 +10,9 @@ let form = document.getElementById('buildPairs');
 // events def
 
 // utils
-let addSelect = (data) => {
+let addSelect = (data, type) => {
     let select = document.createElement('SELECT');
-    select.name = 'color' + c_clrs;
+    select.name = `${type}${nClrs}`;
 
     data.forEach(e => {
         let opt = document.createElement('OPTION');
@@ -27,16 +27,17 @@ let addSelect = (data) => {
 
 let addSelectPair = () => {
     let div = document.createElement('DIV');
-    let garmentsSel = addSelect(garments);;
-    let colorsSel = addSelect(colors);;
+    let garmentsSel = addSelect(garments, 'g');;
+    let colorsSel = addSelect(colors, 'c');;
 
     div.appendChild(garmentsSel);
     div.appendChild(colorsSel);
-    form.appendChild(div);
+    form.prepend(div);
 }
 
 let createForm = () => {
     addSelectPair();
+    nClrs++;
 
     let addPair = document.createElement('BUTTON');
     addPair.innerHTML = 'ADD';
@@ -52,4 +53,5 @@ window.onload = () => {
 let handleAddPair = (event) => {
     event.preventDefault();
     addSelectPair();
+    nClrs++;
 }
