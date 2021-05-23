@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solusction</title>
+</head>
+<body>
+    {% if data %}
+        <!-- TODO solusction -->
+        {% for el in data %}
+          <div>{{ el }}</div>
+            <script>
+                var c = document.getElementById("man_canvas");
+                var ctx = c.getContext("2d");
+                if( `pants` == "pants"){
+                    ctx.fillStyle = `red`;
+                    ctx.fillRect(150, 250, 100, 200)
+                }
+            </script>
+        {% endfor %}
+    {% endif %}
+    <canvas id="man_canvas" width="1000" height="1000"></canvas>
+</body>
+</html>

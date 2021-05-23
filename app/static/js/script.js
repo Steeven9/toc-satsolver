@@ -47,11 +47,40 @@ let createForm = () => {
 
 // functionevents
 window.onload = () => {
-    createForm();
+    if(form){
+        createForm();
+    }
+    draw_man();
 }
 
 let handleAddPair = (event) => {
     event.preventDefault();
     addSelectPair();
     nClrs++;
+}
+
+let draw_man = (id = "man_canvas", data) =>{
+    var c = document.getElementById(id);
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc(200, 50, 40, 0, 2 * Math.PI);
+    ctx.stroke()
+    ctx.moveTo(100, 150)
+    ctx.lineTo(300, 150)
+    ctx.stroke()
+    ctx.moveTo(200, 90)
+    ctx.lineTo(200, 290)
+    ctx.stroke()
+
+    ctx.moveTo(170, 290)
+    ctx.lineTo(230, 290)
+    ctx.stroke()
+
+    ctx.moveTo(170, 290)
+    ctx.lineTo(170, 450)
+    ctx.stroke()
+    ctx.moveTo(230, 290)
+    ctx.lineTo(230, 450)
+    ctx.stroke()
+
 }

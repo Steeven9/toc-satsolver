@@ -31,7 +31,7 @@ def solusction():
     dict = {'garment': garments, 'color': colors} 
     df = pd.DataFrame(dict)
     sol = sat_solve(df)
-    return render_template('index.html', data=sol)
+    return render_template('solusction.html', data=sol)
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
