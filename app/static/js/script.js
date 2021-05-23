@@ -40,7 +40,7 @@ let createForm = () => {
     nClrs++;
 
     let addPair = document.createElement('BUTTON');
-    addPair.innerHTML = 'ADD';
+    addPair.innerHTML = 'Add another item';
     addPair.addEventListener('click', handleAddPair);
     form.appendChild(addPair);
 }
