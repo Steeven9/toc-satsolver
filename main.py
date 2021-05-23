@@ -34,7 +34,9 @@ def sat_solve(data):
     # Parse input-related clauses
     cond_array = []
     for pair in data.values:
-        cond_array.append(And(dict_garments[pair[0]], dict_colors[pair[1]]))
+        # print(pair[0])
+        # print(pair[1].strip())
+        cond_array.append(And(dict_garments[pair[0].strip()], dict_colors[pair[1].strip()]))
     for el in dict_garments:
         if el not in data.values:
             s.add(Not(dict_garments[el]))
