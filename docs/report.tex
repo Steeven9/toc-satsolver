@@ -18,9 +18,7 @@
 
 \section{Problem Design and Interpretation}
 
-First and foremost, this problem is very loosely defined which means that it was mostly up to us to come up with constraints or with a problem size over the specified input of a pair $\langle \text{garment, colour} \rangle$.
-
-We began with defining two sets $G$ and $C$ for garments and colours respectively, both of size $10$, as follows:
+First and foremost, this problem is very loosely defined which means that it was mostly up to us to come up with constraints or with a problem size over the specified input of a pair of garments and colours: $\langle g, c \rangle$ where $g \in G$ and $c \in C$ where $G$ and $C$ are sets that include garments and colours respectively, both of size $10$, and we can define them as follows:
 
 \mygather{
 	G = \{\text{pants, shirt, hat, jacket, sweater, gloves, shoes, tie, scarf, shorts} \} \\
@@ -37,27 +35,33 @@ We define these constraints as follows in a boolean way:
 \hline
 Boolean Constraints \\
 \hline
-$\neg$(pants $\wedge$ shorts) \\
-$\neg$(shorts $\wedge$ jacket) \\
-scarf $\rightarrow$ jacket \\
-gloves $\rightarrow$ jacket \\
+$\neg$(yellow $\wedge$ white) \\[0.1cm]
+$\neg$(blue $\wedge$ purple) \\[0.1cm]
+$\neg$(blue $\wedge$ black) \\[0.1cm]
+$\neg$(red $\wedge$ green) \\[0.1cm]
+$\neg$(red $\wedge$ orange) \\[0.1cm]
+$\neg$(green $\wedge$ pink) \\[0.1cm]
+$\neg$(green $\wedge$ orange) \\[0.1cm]
+$\neg$(pants $\wedge$ shorts) \\[0.1cm]
+$\neg$(shorts $\wedge$ jacket) \\[0.1cm]
+scarf $\rightarrow$ jacket \\[0.1cm]
+gloves $\rightarrow$ jacket \\[0.1cm]
 tie $\rightarrow$ shirt \\
-$\neg$(yellow $\wedge$ white) \\
-$\neg$(blue $\wedge$ purple) \\
-$\neg$(blue $\wedge$ black) \\
-$\neg$(red $\wedge$ green) \\
-$\neg$(red $\wedge$ orange) \\
-$\neg$(green $\wedge$ pink) \\
-$\neg$(green $\wedge$ orange) \\
 \hline
-
-
 \end{tabular}
 \end{center}
 
+Finally, we go over the given input file and we determine
+
 \section{Implementation}
+
+\subsection{SAT Solver}
+
+\subsection{User Interface}
 
 \section{Issues Encountered}
 \label{section:issues}
+
+\section{Conclusions}
 
 \end{document}
