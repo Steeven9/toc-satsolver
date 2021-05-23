@@ -43,6 +43,8 @@ let createForm = () => {
     addPair.innerHTML = 'Add another item';
     addPair.addEventListener('click', handleAddPair);
     form.appendChild(addPair);
+    draw_man();
+
 }
 
 // functionevents
@@ -50,7 +52,7 @@ window.onload = () => {
     if(form){
         createForm();
     }
-    draw_man();
+
 }
 
 let handleAddPair = (event) => {
