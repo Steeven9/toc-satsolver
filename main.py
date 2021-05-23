@@ -14,7 +14,7 @@ def sat_solve(data):
     # Remove duplicates
     input_data = set()
     for pair in data.values:
-        input_data.add((pair[0], pair[1]))
+        input_data.add((pair[0].strip(), pair[1].strip()))
 
     print("\nFiltered data:")
     print(input_data)
@@ -42,7 +42,7 @@ def sat_solve(data):
     # Parse input-related clauses
     cond_array = []
     for pair in input_data:
-        cond_array.append(And(dict_garments[pair[0].strip()], dict_colors[pair[1].strip()]))
+        cond_array.append(And(dict_garments[pair[0]], dict_colors[pair[1]]))
     s.add(Or(cond_array))
     for el in dict_garments:
         found = False
