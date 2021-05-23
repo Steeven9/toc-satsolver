@@ -3,13 +3,20 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
   <title>Fashion Store Solver</title>
   <meta name="description" content="The Fashion Store Solver">
   <meta name="author" content="Group 5">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
-
+  <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='/img/apple-touch-icon.png')}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='/img/favicon-32x32.png')}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='/img/favicon-16x16.png')}}">
+  <link rel="manifest" href="{{url_for('static', filename='/img/site.webmanifest')}}">
+  <link rel="mask-icon" href="{{url_for('static', filename='/img/safari-pinned-tab.svg')}}" color="#5bbad5">
+  <link rel="shortcut icon" href="{{url_for('static', filename='/img/favicon.ico')}}">
+  <meta name="msapplication-TileColor" content="#2d89ef">
+  <meta name="msapplication-config" content="{{url_for('static', filename='/img/browserconfig.xml')}}">
+  <meta name="theme-color" content="#2d89ef">
 </head>
 
 <body>
@@ -20,19 +27,20 @@
       </marquee>
 
       <h2>
-        Build your mannequin from an input file.
+        Build your mannequin from an input file
       </h2>
-      <form action = "/uploader" method = "POST" 
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "submit" value="Solve!"/>
-      </form>   
-      <h2>
-        Build your mannequin here
-      </h2>
-      <form id="buildPairs" action = "/solusction" method = "POST">
-        <input type = "submit" value="Solve!"/>
+      <form action="/uploader" method="POST" enctype="multipart/form-data">
+         <input type="file" name="file" />
+         <input type="submit" value="Solve!"/>
       </form>
+
+      <h2>
+        Build your mannequin interactively
+      </h2>
+      <form id="buildPairs" action="/solusction" method="POST">
+        <input type="submit" value="Solve!"/>
+      </form>
+
       <canvas id="man_canvas" width="1000" height="1000"></canvas>
       {% if data %}
         {% for el in data %}
@@ -122,7 +130,5 @@
         {% endfor %}
       {% endif %}
       <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
-
-
 </body>
 </html>
