@@ -4,6 +4,10 @@
 \date{}
 
 \usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+
+
+\newcommand{\mygather}[1]{\begin{gather*} #1 \end{gather*}}
 
 \setlength{\parindent}{0cm}
 
@@ -14,8 +18,46 @@
 
 \section{Problem Design and Interpretation}
 
+First and foremost, this problem is very loosely defined which means that it was mostly up to us to come up with constraints or with a problem size over the specified input of a pair $\langle \text{garment, colour} \rangle$.
+
+We began with defining two sets $G$ and $C$ for garments and colours respectively, both of size $10$, as follows:
+
+\mygather{
+	G = \{\text{pants, shirt, hat, jacket, sweater, gloves, shoes, tie, scarf, shorts} \} \\
+	S = \{\text{red, yellow, orange, green, blue, purple, brown, pink, white, black} \}
+}
+
+We chose a small size for the sake of simplicity of the project and for a more realistic aspect. We will go over this part in more detail in \textbf{Section \ref{section:issues}}.
+
+Given these two sets, we devised constraints over them that will always be added. They are hardcoded as they specify, for instance, which garments (or colours) should or should not go together.
+We define these constraints as follows in a boolean way:
+
+\begin{center}
+\begin{tabular}{|l|}
+\hline
+Boolean Constraints \\
+\hline
+$\neg$(pants $\wedge$ shorts) \\
+$\neg$(shorts $\wedge$ jacket) \\
+scarf $\rightarrow$ jacket \\
+gloves $\rightarrow$ jacket \\
+tie $\rightarrow$ shirt \\
+$\neg$(yellow $\wedge$ white) \\
+$\neg$(blue $\wedge$ purple) \\
+$\neg$(blue $\wedge$ black) \\
+$\neg$(red $\wedge$ green) \\
+$\neg$(red $\wedge$ orange) \\
+$\neg$(green $\wedge$ pink) \\
+$\neg$(green $\wedge$ orange) \\
+\hline
+
+
+\end{tabular}
+\end{center}
+
 \section{Implementation}
 
 \section{Issues Encountered}
+\label{section:issues}
 
 \end{document}
