@@ -11,6 +11,14 @@ def sat_solve(data):
     print("Input data:")
     print(data)
 
+    # Remove duplicates
+    input_data = set()
+    for pair in data.values:
+        input_data.add((pair[0], pair[1]))
+
+    print("\nFiltered data:")
+    print(input_data)
+
     s = Solver()
 
     # Basic clauses
@@ -33,14 +41,17 @@ def sat_solve(data):
 
     # Parse input-related clauses
     cond_array = []
-    for pair in data.values:
-        # print(pair[0])
-        # print(pair[1].strip())
+    for pair in input_data:
         cond_array.append(And(dict_garments[pair[0].strip()], dict_colors[pair[1].strip()]))
-    for el in dict_garments:
-        if el not in data.values:
-            s.add(Not(dict_garments[el]))
     s.add(Or(cond_array))
+    for el in dict_garments:
+        found = False
+        for el_input in input_data:
+            if el == el_input[0]:
+                found = True
+                break
+        if not found:
+            s.add(Not(dict_garments[el]))
 
     print("\nConstraints:")
     for c in s.assertions():
@@ -58,7 +69,7 @@ def sat_solve(data):
         print("\nActual pairs:")
         actual_pairs = []
         # Return actual pairs
-        for pair in data.values:
+        for pair in input_data:
             for d in m.decls():
                 if pair[0] == d.name() and m[d]:
                     gar = d.name()
@@ -67,7 +78,7 @@ def sat_solve(data):
                             print("%s %s" % (gar, d.name()))
                             actual_pairs.append((gar, d.name()))
     else:
-        actual_pairs = [('UNSATISFIBLE', 'UNSATISFIBLE')]
+        actual_pairs = [('UNSATISFIABLE', 'UNSATISFIABLE')]
 
     if debug:
         print("\nStatistics:")

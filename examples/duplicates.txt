@@ -1,0 +1,10 @@
+# First line must be this one:
+garment, color
+# then you can insert the pairs (garnment, color) below
+scarf, blue
+jacket, yellow
+jacket, yellow
+pants, orange
+shorts, blue
+shorts, blue
+shorts, blue
