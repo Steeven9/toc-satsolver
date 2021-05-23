@@ -17,6 +17,7 @@
   <meta name="msapplication-TileColor" content="#2d89ef">
   <meta name="msapplication-config" content="{{url_for('static', filename='/img/browserconfig.xml')}}">
   <meta name="theme-color" content="#2d89ef">
+
 </head>
 
 <body>
@@ -48,14 +49,35 @@
       </canvas>
 
 
-
       {% if data %}
+        <script>
+          let c = document.getElementById("man_canvas");
+          let ctx = c.getContext("2d");
+          let offset_y = 100;
+          ctx.beginPath();
+          ctx.arc(200, 50 + offset_y, 40, 0, 2 * Math.PI);
+          ctx.stroke()
+          ctx.moveTo(100, 150+ offset_y)
+          ctx.lineTo(300, 150+ offset_y)
+          ctx.stroke()
+          ctx.moveTo(200, 90+ offset_y)
+          ctx.lineTo(200, 290+ offset_y)
+          ctx.stroke()
+
+          ctx.moveTo(170, 290+ offset_y)
+          ctx.lineTo(230, 290+ offset_y)
+          ctx.stroke()
+
+          ctx.moveTo(170, 290+ offset_y)
+          ctx.lineTo(170, 450+ offset_y)
+          ctx.stroke()
+          ctx.moveTo(230, 290+ offset_y)
+          ctx.lineTo(230, 450+ offset_y)
+          ctx.stroke()
+        </script>
         {% for el in data %}
           <div>{{ el }}</div>
             <script>
-                var c = document.getElementById("man_canvas");
-                var ctx = c.getContext("2d");
-
                 if(`{{el[0]}}` === "pants"){
                     ctx.fillStyle = `{{el[1]}}`;
                     // ctx.strokeRect(150, 350, 100, 50);
@@ -134,7 +156,7 @@
                     ctx.fillRect(215, 570, 55, 30);
                 }
 
-                
+
                 else if (`{{el[0]}}` === "tie"){
                     ctx.fillStyle = `{{el[1]}}`;
                     ctx.beginPath()
@@ -173,9 +195,9 @@
                   img.style.color = `{{el[1]}}`;
 
                 }
-
             </script>
         {% endfor %}
+
       {% endif %}
       <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
 </body>

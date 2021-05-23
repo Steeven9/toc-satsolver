@@ -1,0 +1,8 @@
+# First line must be this one:
+garment, color
+# then you can insert the pairs (garnment, color) below
+shirt, green
+hat, green
+pants, green
+shoes, green
+ak, green
