@@ -34,6 +34,93 @@
         <input type = "submit" value="Solve!"/>
       </form>
       <canvas id="man_canvas" width="1000" height="1000"></canvas>
+      {% if data %}
+        {% for el in data %}
+          <div>{{ el }}</div>
+            <script>
+                var c = document.getElementById("man_canvas");
+                var ctx = c.getContext("2d");
+
+
+                if(`{{el[0]}}` === "pants"){
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(150, 350, 100, 50)
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(150, 350, 35, 200)
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(215, 350, 35, 200)
+                }
+
+                else if (`{{el[0]}}` === "shirt"){
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(100, 225 + offset, 200, 50)
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(150, 225 + offset, 100, 150)
+
+                    for(let i = 0; i<=4; i++) {
+                      ctx.beginPath();
+                      ctx.arc(200, 250 + i * 20, 5, 0, 2 * Math.PI);
+                      ctx.fillStyle = "white";
+                      ctx.fill();
+                      ctx.stroke()
+                    }
+
+
+                }
+                // TODO: 'hat': hat,
+                else if (`{{el[0]}}` == "hat"){
+
+                }
+                // TODO: 'jacket': jacket,
+                else if (`{{el[0]}}` === "jacket"){
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(100, 225, 200, 50);
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(130, 225, 140, 200);
+
+                }
+                // TODO: 'sweater': sweater,
+                else if (`{{el[0]}}` === "sweater"){
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(100, 225, 200, 50);
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(130, 225, 140, 200);
+
+                }
+
+                else if (`{{el[0]}}` === "gloves"){
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(50, 225, 50, 50);
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(300, 225, 50, 50);
+                }
+                // TODO: 'shoes': shoes
+                else if (`{{el[0]}}` === "shoes"){
+
+                }
+                // TODO: 'tie': tie
+                else if (`{{el[0]}}` === "tie"){
+
+                }
+                // TODO: 'scarf': scarf,
+                else if (`{{el[0]}}` === "scarf"){
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(175, 190, 50, 40);
+                }
+
+                else if (`{{el[0]}}` === "shorts"){
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(150, 350, 100, 50)
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(150, 350, 35, 100)
+                    ctx.fillStyle = `{{el[1]}}`;
+                    ctx.fillRect(215, 350, 35, 100)
+
+                }
+
+            </script>
+        {% endfor %}
+      {% endif %}
       <script type="text/javascript" src="{{url_for('static', filename='js/script.js')}}"></script>
 
 

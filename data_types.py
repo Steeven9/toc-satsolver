@@ -23,6 +23,8 @@ brown = Bool('brown')
 pink = Bool('pink')
 white = Bool('white')
 black = Bool('black')
+# Kalashnikov
+ak = Bool('ak')
 
 dict_garments = {
     'pants': pants,
@@ -34,7 +36,8 @@ dict_garments = {
     'shoes': shoes,
     'tie': tie,
     'scarf': scarf,
-    'shorts': shorts
+    'shorts': shorts,
+    'ak': ak
 }
 
 dict_colors = {
