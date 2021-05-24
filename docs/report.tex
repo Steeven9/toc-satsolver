@@ -6,6 +6,7 @@
 \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage[hidelinks]{hyperref}
+\usepackage{amssymb}
 
 
 \newcommand{\mygather}[1]{\begin{gather*} #1 \end{gather*}}
@@ -53,7 +54,7 @@
     \end{tabular}
     \end{center}
 
-    Finally, we go over the given input file and we determine
+    Finally, we go over the given input file and we determine the final constraints. If one of the garments is missing, we make sure that they are put in a \textbf{NOT} boolean operator to take their absence into account otherwise, if present, we simply create an \textbf{OR} operator of an \textbf{AND} over a pair comprising a garment $g$ and its color $c$ that we are given and we evaluate it with respect to our constraints. So, basically, we would either obtain, over an input $\langle g, c \rangle$, if absent, $\neg g$ or $(g \wedge c)$ otherwise.
 
 
 \section{Implementation}
@@ -81,6 +82,17 @@
 \section{Issues Encountered}
 \label{section:issues}
 
+Other than the typical issues that may arise when programming (i.e. bugs, code design, etc...), the main issue that we encountered ended up being caused by the fact that the problem assigned to us was loosely defined. This meant that we had freedom to pick on how to develop it but that, also, we had to make sure to keep it complete while not overcomplicating it.\\
+
+As we had described in \textbf{Section \ref{section:design}}, we decided to make the size of the problem relatively small by limiting the possible colors and garments to a set of ten elements each. Along with the fact that, in reality, oftentimes we would not expect to have to dress a mannequin with thousands of garments and colours, we also thought that it would be easier to define our own sets and constraints over them rather than to allow variable inputs.\\
+
+The main issue that would have come with a variable input where you would allow the input to decide how many garments and colours would be available (along with the subsequent possible pairs) would have been to define the constraints over the sets of colours and garments.\\
+
+For instance, if we take our own sets, we have $10$ garments and $10$ colours and we have added constraints with the knowledge of those garments and colours.
+
+If for example we had $x$ garments and $y$ colours where $x, y \in \mathbb{N}$, we then would first of all have $x \cdot y$ possible pairs and, furthermore, defining the constraints over them would be incredibly tough and we might have to take a randomized approach where, given $x$ garments and $y$ colours and a set $S$ containing a pair of garments and colours $\langle g, c \rangle$, we take a random garment $g$ and we put a constraint over it with respect to another garment $g'$, same approach for the colours.\\
+
+Therefore, given the fact that a variable input size with respect the number of garments and colours (and not to the number of pairs), we have delimited the problem to two given sets of size $10$ each where we clearly define our constraints.
 
 \section{Conclusions}
 
