@@ -1,7 +1,7 @@
 // globals variable
 let nClrs = 0;
 let colors = ['red', 'yellow', ' orange', 'green', 'blue', 'purple', 'brown', 'pink', 'white', 'black'];
-let garments = ['pants', 'shirt', ' hat', 'jacket', 'sweater', 'gloves', 'shoes', 'tie', 'scarf', 'shorts', 'ak'];
+let garments = ['pants', 'shirt', ' hat', 'jacket', 'sweater', 'gloves', 'shoes', 'tie', 'scarf', 'shorts', 'AK'];
 
 
 // DOM targets def
@@ -28,8 +28,8 @@ let addSelect = (data, type) => {
 
 let addSelectPair = () => {
     let div = document.createElement('DIV');
-    let garmentsSel = addSelect(garments, 'g');;
-    let colorsSel = addSelect(colors, 'c');;
+    let garmentsSel = addSelect(garments, 'g');
+    let colorsSel = addSelect(colors, 'c');
 
     div.appendChild(garmentsSel);
     div.appendChild(colorsSel);

@@ -1,5 +1,7 @@
-# Fashion store SATsolver
-Assignment 6 code and report for group 5 (Andrea Brites Marto, Tommaso Rodolfo Masera, Stefano Taillefert, Ted)
+# Funky Fashion Store
+A SATSolver with style! Assignment 6 code and report for group 5 (Andrea Brites Marto, Tommaso Rodolfo Masera, Stefano Taillefert, Ted).
+
+Check out the live demo at [https://bestsatsolver.xyz](https://bestsatsolver.xyz)!
 
 
 ## Install dependencies
@@ -27,12 +29,15 @@ cd app
 flask run
 ```
 
+Then head to `localhost:5000` to access the interface.
+
 
 ## Run the webserver with Docker
 
 ```console
 docker-compose up
 ```
+
 
 ## Constraints
 
