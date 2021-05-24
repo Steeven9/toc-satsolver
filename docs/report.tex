@@ -18,6 +18,52 @@
 
 \section{Installation and Instructions}
 
+We kindly ask you to refer to the \texttt{README.md} file that we will have attached to the assignment submission in order to install the needed dependencies and run our application properly.
+
+As a reminder, we will also put the instructions directly in this PDF document.
+
+First of all, you will find a text file \texttt{requirements.txt} that will simply contain the Python dependencies to be installed in order to run the application. You can simply run on your console:\\
+
+\begin{center}
+	\texttt{pip install --no-cache-dir -r requirements.txt}\\
+	\begin{small}
+		\textbf{Note:} if the command \texttt{pip} should not work, \texttt{pip3} might work instead.
+	\end{small}
+\end{center}
+
+Then, if you'd like to run the program from CLI, you can simply do as follows:
+
+\begin{center}
+	\texttt{python main.py input\_file}\\
+	or \\
+	\texttt{python3 main.py input\_file} \\
+	where ``\texttt{input\_file}'' is a text file with the pairs of garments and colours $\langle g, c \rangle$. See ``\texttt{examples/}'' or below for proper formatting.
+\end{center}
+
+If you instead would prefer to run the web server and the web application we developed, refer to these instructions:
+
+\begin{center}
+	From console: \\
+	\texttt{cd app}\\
+	\texttt{flask run}\\
+	Head to \texttt{localhost:5000} from your browser to access the interface.\\
+	If you'd like to run it with Docker, you can run \texttt{docker-compose up} from your terminal.
+\end{center}
+
+For an example of what an input file should look like, refer to what follows here:
+
+A text file in the following format where the first line \texttt{garment, color} should \textbf{NOT} be changed and should \textbf{ALWAYS} be present to then follow with the pairs you would like to feed to the script. Here is an example:
+
+\begin{center}
+
+	{
+		\ttfamily
+		garment, color\\
+		shirt, black\\
+		shorts, white\\
+		jacket, blue\\
+}
+\end{center}
 
 \section{Problem Design and Interpretation}\label{section:design}
 
@@ -84,15 +130,15 @@
 
 Other than the typical issues that may arise when programming (i.e. bugs, code design, etc...), the main issue that we encountered ended up being caused by the fact that the problem assigned to us was loosely defined. This meant that we had freedom to pick on how to develop it but that, also, we had to make sure to keep it complete while not overcomplicating it.\\
 
-As we had described in \textbf{Section \ref{section:design}}, we decided to make the size of the problem relatively small by limiting the possible colors and garments to a set of ten elements each. Along with the fact that, in reality, oftentimes we would not expect to have to dress a mannequin with thousands of garments and colours, we also thought that it would be easier to define our own sets and constraints over them rather than to allow variable inputs.\\
+As we had described in \textbf{Section \ref{section:design}}, we decided to make the size of the problem relatively small by limiting the possible colors and garments to a set of ten elements each. Along with the fact that, in reality, oftentimes we would not expect to have to dress a mannequin with thousands of garments and colours, we also thought that it would be easier to define our own sets and constraints over them rather than to allow variable input sizes.\\
 
-The main issue that would have come with a variable input where you would allow the input to decide how many garments and colours would be available (along with the subsequent possible pairs) would have been to define the constraints over the sets of colours and garments.\\
+The main issue that would have come with a variable input size where you would allow the input to decide how many garments and colours would be available (along with the subsequent possible pairs) would have been to define the constraints over the sets of colours and garments.\\
 
 For instance, if we take our own sets, we have $10$ garments and $10$ colours and we have added constraints with the knowledge of those garments and colours.
 
 If for example we had $x$ garments and $y$ colours where $x, y \in \mathbb{N}$, we then would first of all have $x \cdot y$ possible pairs and, furthermore, defining the constraints over them would be incredibly tough and we might have to take a randomized approach where, given $x$ garments and $y$ colours and a set $S$ containing a pair of garments and colours $\langle g, c \rangle$, we take a random garment $g$ and we put a constraint over it with respect to another garment $g'$, same approach for the colours.\\
 
-Therefore, given the fact that a variable input size with respect the number of garments and colours (and not to the number of pairs), we have delimited the problem to two given sets of size $10$ each where we clearly define our constraints.
+Therefore, given the fact that a variable input size with respect to the number of garments and colours (and not to the number of pairs), we have delimited the problem to two given sets of size $10$ each where we clearly define our constraints.
 
 \section{Conclusions}
 
