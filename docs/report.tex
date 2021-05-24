@@ -5,6 +5,7 @@
 
 \usepackage[margin=2cm]{geometry}
 \usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
 
 
 \newcommand{\mygather}[1]{\begin{gather*} #1 \end{gather*}}
@@ -16,52 +17,72 @@
 
 \section{Installation and Instructions}
 
-\section{Problem Design and Interpretation}
 
-First and foremost, this problem is very loosely defined which means that it was mostly up to us to come up with constraints or with a problem size over the specified input of a pair of garments and colours: $\langle g, c \rangle$ where $g \in G$ and $c \in C$ where $G$ and $C$ are sets that include garments and colours respectively, both of size $10$, and we can define them as follows:
+\section{Problem Design and Interpretation}\label{section:design}
 
-\mygather{
-	G = \{\text{pants, shirt, hat, jacket, sweater, gloves, shoes, tie, scarf, shorts} \} \\
-	S = \{\text{red, yellow, orange, green, blue, purple, brown, pink, white, black} \}
-}
+    First and foremost, this problem is very loosely defined which means that it was mostly up to us to come up with constraints or with a problem size over the specified input of a pair of garments and colours: $\langle g, c \rangle$ where $g \in G$ and $c \in C$ where $G$ and $C$ are sets that include garments and colours respectively, both of size $10$, and we can define them as follows:
 
-We chose a small size for the sake of simplicity of the project and for a more realistic aspect. We will go over this part in more detail in \textbf{Section \ref{section:issues}}.
+    \mygather{
+        G = \{\text{pants, shirt, hat, jacket, sweater, gloves, shoes, tie, scarf, shorts} \} \\
+        S = \{\text{red, yellow, orange, green, blue, purple, brown, pink, white, black} \}
+    }
 
-Given these two sets, we devised constraints over them that will always be added. They are hardcoded as they specify, for instance, which garments (or colours) should or should not go together.
-We define these constraints as follows in a boolean way:
+    We chose a small size for the sake of simplicity of the project and for a more realistic aspect. We will go over this part in more detail in \textbf{Section \ref{section:issues}}.
 
-\begin{center}
-\begin{tabular}{|l|}
-\hline
-Boolean Constraints \\
-\hline
-$\neg$(yellow $\wedge$ white) \\[0.1cm]
-$\neg$(blue $\wedge$ purple) \\[0.1cm]
-$\neg$(blue $\wedge$ black) \\[0.1cm]
-$\neg$(red $\wedge$ green) \\[0.1cm]
-$\neg$(red $\wedge$ orange) \\[0.1cm]
-$\neg$(green $\wedge$ pink) \\[0.1cm]
-$\neg$(green $\wedge$ orange) \\[0.1cm]
-$\neg$(pants $\wedge$ shorts) \\[0.1cm]
-$\neg$(shorts $\wedge$ jacket) \\[0.1cm]
-scarf $\rightarrow$ jacket \\[0.1cm]
-gloves $\rightarrow$ jacket \\[0.1cm]
-tie $\rightarrow$ shirt \\
-\hline
-\end{tabular}
-\end{center}
+    Given these two sets, we devised constraints over them that will always be added. They are hardcoded as they specify, for instance, which garments (or colours) should or should not go together.
+    We define these constraints as follows in a boolean way:
 
-Finally, we go over the given input file and we determine
+    \begin{center}
+    \begin{tabular}{|l|}
+    \hline
+    Boolean Constraints \\
+    \hline
+    $\neg$(yellow $\wedge$ white) \\[0.1cm]
+    $\neg$(blue $\wedge$ purple) \\[0.1cm]
+    $\neg$(blue $\wedge$ black) \\[0.1cm]
+    $\neg$(red $\wedge$ green) \\[0.1cm]
+    $\neg$(red $\wedge$ orange) \\[0.1cm]
+    $\neg$(green $\wedge$ pink) \\[0.1cm]
+    $\neg$(green $\wedge$ orange) \\[0.1cm]
+    $\neg$(pants $\wedge$ shorts) \\[0.1cm]
+    $\neg$(shorts $\wedge$ jacket) \\[0.1cm]
+    scarf $\rightarrow$ jacket \\[0.1cm]
+    gloves $\rightarrow$ jacket \\[0.1cm]
+    tie $\rightarrow$ shirt \\
+    \hline
+    \end{tabular}
+    \end{center}
+
+    Finally, we go over the given input file and we determine
+
 
 \section{Implementation}
 
-\subsection{SAT Solver}
+    \subsection{SAT Solver}
+        The main core of the project is the solver program (\texttt{main.py}), written entirely in Python. 
+        We used the \texttt{z3-solver} library (\url{https://github.com/Z3Prover/z3}) to get most of the job done since it provided us with the functionalities
+        we needed and was very straightforward to use. We also used \texttt{pandas} to read the input file. No, we did not ask a bunch of fluffy animals to read out the text, it's a Python library. Come on.\\
+        Our program first puts the input pairs of garments and colors into a set, to filter out duplicates. Then, we build the constraints list as detailed in section \ref{section:design} and we check whether the model is
+        satisfiable or not. If it's the case, we print out the solution.
 
-\subsection{User Interface}
+    \subsection{User Interface}
+        We needed to quickly develop a solid interface; the perfect candidate for this, given our skills, was a webpage. Therefore, given that the rest of the code
+        was already in Python, we resorted to \texttt{Flask}, which is a simple yet powerful library to make web applications.\\
+        The script (\texttt{app/app.py}) simply renders an HTML page with two inputs to compose the mannequin and a canvas to represent the solution, which is obtained by 
+        calling our solver with the given input data.
+
+        % TODO insert interface screenshot (when finished)
+
+    \subsection{Deployment}
+        Since we built a web interface, we thought it would be a good idea to deploy our project as a fully functional website. 
+        For this reason, we purchased the domain \url{bestsatsolver.xyz}, packed our app in a Docker container and put it on a small server of ours.
+        The whole process was pretty straightforward, given that our project has a very simple structure and doesn't depend on other services like databases or external APIs.
 
 \section{Issues Encountered}
 \label{section:issues}
 
+
 \section{Conclusions}
+
 
 \end{document}
