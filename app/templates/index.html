@@ -67,6 +67,7 @@
         let c = document.getElementById("man_canvas");
         let ctx = c.getContext("2d");
         let offset_y = 100;
+        ctx.strokeStyle = "white";
         ctx.beginPath();
         ctx.arc(200, 50 + offset_y, 40, 0, 2 * Math.PI);
         ctx.stroke();
@@ -87,6 +88,7 @@
         ctx.moveTo(230, 290+ offset_y);
         ctx.lineTo(230, 450+ offset_y);
         ctx.stroke();
+        ctx.strokeStyle = "black";
 
         let tie_flag = false;
         let tie_data = "";
