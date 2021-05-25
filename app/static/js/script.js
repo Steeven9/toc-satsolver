@@ -33,7 +33,7 @@ let addSelectPair = () => {
 
     div.appendChild(garmentsSel);
     div.appendChild(colorsSel);
-    form.prepend(div);
+    form.childNodes[nClrs].parentNode.insertBefore(div, form.childNodes[nClrs].nextSibling);
 }
 
 let createForm = () => {
@@ -43,7 +43,7 @@ let createForm = () => {
     let addPair = document.createElement('BUTTON');
     addPair.innerHTML = 'Add another item';
     addPair.addEventListener('click', handleAddPair);
-    form.appendChild(addPair);
+    form.insertBefore(addPair, form.childNodes[2]);
 }
 
 // functionevents

@@ -6,13 +6,34 @@
 
 body {
     margin: 20px;
-    background-color: #f3f3f3;
+    color: #88888a;
+    background-color: #1a1a1d;
+    text-align:center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 button, input[type="submit"] {
+    background-color: #354bc3;
     padding: 5px;
+    border-radius: 15px;
+    border: 1px solid black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: color, background-color, 400ms;
+
+}
+
+button:hover, input[type="submit"]:hover {
+    cursor: pointer;
+    border: 1px solid #88888a;
+    background-color: #1a1a1d;
+    color:#88888a;
+}
+
+select {
+    padding:5px 10px;
+    background-color: #1a1a1d;
+    color: #88888a;
+    border: 1px solid #88888a;
 }
 
 h2 {
