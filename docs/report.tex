@@ -24,34 +24,31 @@
 
 We kindly ask you to refer to the \texttt{README.md} file that we will have attached to the assignment submission in order to install the needed dependencies and run our application properly.
 
-As a reminder, we will also put the instructions directly in this PDF document.
+For completeness, we will also put the instructions directly in this document.
 
-First of all, you will find a text file named \texttt{requirements.txt} that contains the Python dependencies to be installed in order to run the application. You can simply run on your console:\\
+First of all, you will find a text file named \texttt{requirements.txt} that contains the Python dependencies to be installed in order to run the application. You can simply run in your console:
 
 \begin{center}
 	\texttt{pip install --no-cache-dir -r requirements.txt}\\
-	\begin{small}
-		\textbf{Note:} if the command \texttt{pip} should not work, \texttt{pip3} might work instead.
-	\end{small}
 \end{center}
 
 Then, if you'd like to run the program from CLI, you can simply do as follows:
 
 \begin{center}
 	\texttt{python main.py input\_file}\\
-
-	where ``\texttt{input\_file}'' is a text file with the pairs of garments and colours $\langle g, c \rangle$. See under ``\texttt{examples/}'' or below for proper formatting.
 \end{center}
+
+where ``\texttt{input\_file}'' is a text file with the pairs of garments and colours $\langle g, c \rangle$. See under ``\texttt{examples/}'' or below for proper formatting.
 
 If you instead would prefer to run the web server and the web application we developed, refer to these instructions:
 
 \begin{center}
-	From console: \\
 	\texttt{cd app}\\
 	\texttt{flask run}\\
-	Head to \texttt{localhost:5000} from your browser to access the interface.\\
-	If you'd like to run it with Docker, you can run \texttt{docker-compose up} from your terminal instead.
 \end{center}
+
+Head to \texttt{localhost:5000} from your browser to access the interface.
+If you'd like to run it with Docker, you can run \texttt{docker-compose up} from your terminal instead.\\
 
 For an example of what an input file should look like, refer to what follows here:
 
@@ -70,7 +67,7 @@ A text file in the following format where the first line \texttt{garment, color}
 
 \section{Problem Design and Interpretation}\label{section:design}
 
-    First and foremost this problem is very loosely defined, which means that it was mostly up to us to come up with constraints or with an appropriate problem size. Our input is a pair of garments and colours $\langle g, c \rangle$, where $g \in G$ and $c \in C$; $G$ and $C$ are sets that include garments and colours respectively, both of size $10$, and are defined as follows:
+    First and foremost this problem is very loosely defined, which means that it was mostly up to us to come up with constraints and with an appropriate problem size. Our input is a pair of garments and colours $\langle g, c \rangle$, where $g \in G$ and $c \in C$; $G$ and $C$ are sets that include garments and colours respectively, both of size $10$, and are defined as follows:
 
     \mygather{
         G = \{\text{pants, shirt, hat, jacket, sweater, gloves, shoes, tie, scarf, shorts} \} \\
@@ -80,7 +77,7 @@ A text file in the following format where the first line \texttt{garment, color}
     We chose a small size for the sake of simplicity of the project and for a more realistic aspect. We will go over this part in more detail in \textbf{section \ref{section:issues}}.
 
     Given these two sets, we devised constraints over them that will always be added. They are hardcoded as they specify, for instance, which garments (or colours) should or should not go together.
-    We define these constraints as follows in a boolean way:
+    We define these constraints with the following boolean expressions:
 
     \begin{center}
     \begin{tabular}{|l|}
@@ -103,7 +100,9 @@ A text file in the following format where the first line \texttt{garment, color}
     \end{tabular}
     \end{center}
 
-    Finally, we go over the given input file and we determine the final constraints. If one of the garments is missing, we make sure that they are put in a \textbf{NOT} boolean operator to take their absence into account; otherwise, if present, we simply add to our constraints list an \textbf{OR} operator of an \textbf{AND} over a pair comprising a garment $g$ and its color $c$. So basically, over an input $\langle g, c \rangle$, we would either obtain $\neg g$ if absent or $(g \wedge c)$ otherwise.
+    Finally, we go over the given input file and we determine the final constraints. If one of the garments is missing, we make sure that they are put in a \textbf{NOT} boolean operator to take their absence into account; otherwise, if present, we simply add to our constraints list an \textbf{OR} chain of \textbf{AND}s over the pairs comprising a garment $g$ and its color $c$. So basically, over an input $\langle g_1, c_1 \rangle, \langle g_2, c_2 \rangle$, we would obtain the CNF $(g_1 \wedge c_1) \vee (g_2 \wedge c_2) \vee \neg g_3 ... \vee \neg g_n$, plus all the constraints from the table above.
+
+    \newpage
 
 
 \section{Implementation}
@@ -141,17 +140,20 @@ A text file in the following format where the first line \texttt{garment, color}
 \section{Issues Encountered}
 \label{section:issues}
 
-Other than the typical issues that may arise when programming (i.e. bugs, code design, ...), the main issue that we encountered ended up being caused by the fact that the problem assigned to us was loosely defined. This meant that we had freedom to pick on how to develop it but that we also had to make sure to keep it complete while not overcomplicating it.\\
+Other than the typical issues that may arise when programming (i.e. bugs, regretting some code design choices, ...), the main issue that we encountered ended up being caused by the fact that the problem assigned to us was loosely defined. This meant that we had more freedom to choose how to develop it but that we also had to make sure to keep it complete while not overcomplicating it.\\
 
-As we had described in \textbf{section \ref{section:design}}, we decided to keep the size of the problem relatively small by limiting the possible colors and garments to a set of ten elements each. Along with the fact that, in reality, oftentimes we would not expect to have to dress a mannequin with thousands of garments and colours, we also thought that it would be easier to define our own sets and constraints over them rather than to allow variable input sizes.\\
+As we described in \textbf{section \ref{section:design}}, we decided to keep the size of the problem relatively small by limiting the possible colors and garments to a set of ten elements each. Along with the fact that, in reality, oftentimes we would not expect to have to dress a mannequin with thousands of garments and colours, we also thought that it would be easier to define our own sets and constraints over them rather than to allow variable input sizes.\\
 
 The main issue that would have come with a variable input size where you would allow the input to decide how many garments and colours would be available (along with the subsequent possible pairs) would have been to define the constraints over the sets of colours and garments.\\
 
 For instance, if we take our own sets, we have ten garments and ten colours and we have added constraints with the knowledge of those garments and colours.
+If, instead, we had $x$ garments and $y$ colours where $x, y \in \mathbb{N}$, we then would first of all have $x \cdot y$ possible pairs and, furthermore, defining the constraints over them would be incredibly tough and we might have to take a different - perhaps randomized - approach.\\
 
-If for example we had $x$ garments and $y$ colours where $x, y \in \mathbb{N}$, we then would first of all have $x \cdot y$ possible pairs and, furthermore, defining the constraints over them would be incredibly tough and we might have to take a randomized approach: given $x$ garments and $y$ colours and a set $S$ containing a pair of garments and colours $\langle g, c \rangle$, we take a random garment $g$ and we put a constraint over it with respect to another garment $g'$, same approach for the colours.\\
+Therefore, given the fact that a variable input size with respect to the number of garments and colours would be tougher to work with, we have delimited the problem to two given sets of size ten each where we can clearly define our constraints.\\
 
-Therefore, given the fact that a variable input size with respect to the number of garments and colours would be tougher to work with, we have delimited the problem to two given sets of size ten each where we can clearly define our constraints.
+Another problem we discovered while testing edge cases is the following: if the input contains two same garments but of different colors, sometimes the model will allow both and the mannequin will end up e.g. with two pairs of pants on. This stems from the fact that it's very hard to dynamically put an exclusivity constraint to rule out the phenomenon; technically speaking, the \texttt{Xor()} method doesn't support varargs, so we would have to combine each garment in pairs and check all combinations one by one (madness!). Simply filtering the output set felt like cheating with regard to what the model is actually computing, so we solved it by simply considering that the model \textit{offers} you multiple choices when possible. It's not a bug, it's a feature!\\
+
+
 
 
 \end{document}
