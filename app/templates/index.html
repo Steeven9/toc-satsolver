@@ -43,15 +43,18 @@
         Build your mannequin from an input file
       </h2>
       <form action="/uploader" method="POST" enctype="multipart/form-data">
-          <input type="file" name="file" />
-          <input type="submit" value="Solve!"/>
+          <input type="file" name="file" required>
+          <input type="submit" value="Solve!">
       </form>
 
       <h2>
         Build your mannequin interactively
       </h2>
       <form id="buildPairs" action="/solusction" method="POST">
-        <input type="submit" value="Solve!"/>
+        <div>
+          <button type="button" id="addPairButton">Add another garment</button>
+          <input type="submit" value="Solve!">
+        </div>
       </form>
     {% endif %}
 
